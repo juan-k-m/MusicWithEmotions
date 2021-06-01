@@ -30,8 +30,11 @@ termcolor
 
 
 # Image recognition
-deepface
+#deepface
 # OpenCv
 opencv-python
 #Midi files
-mido==1.2.6
+#mido==1.2.6
+
+#music generation
+#magenta
