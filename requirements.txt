@@ -33,3 +33,5 @@ termcolor
 deepface
 # OpenCv
 opencv-python
+#Midi files
+mido==1.2.6
