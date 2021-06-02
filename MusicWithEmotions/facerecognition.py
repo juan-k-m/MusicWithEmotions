@@ -3,5 +3,5 @@ class Facerecognition:
     def __init__(self):
         pass
 
-    def test(self):
-        return 'fer running...'
+    def predict_emotion(self, picture):
+        return 'predicting emotion running...'

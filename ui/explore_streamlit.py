@@ -1,6 +1,8 @@
 import streamlit as st
+from MusicWithEmotions.runprograma import Runprograma
+from MusicWithEmotions.facerecognition import Facerecognition
 from MusicWithEmotions.musicgeneration import Musicgeneration
-
+from MusicWithEmotions.encoderemotion import Encoderemotion
 import altair as alt
 
 
@@ -10,7 +12,6 @@ import pandas as pd
 from numpy import random
 
 
-test = Musicgeneration()
 
 image = Image.open('mwe_logo.PNG')
 st.image(image, use_column_width=True)
@@ -22,7 +23,7 @@ st.image(image, use_column_width=True)
 #           "emotion": ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
 #         })
 
-emotions_list = ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
+#emotions_list = ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
 
 st.markdown("""
 
@@ -34,38 +35,28 @@ st.markdown("""
 
 """)
 
-##### Initialize flags
-flag = False
-flag_call_program = False
-our_test = None
-flag_play = False
+
 
 # And within an expander
-my_expander = st.beta_expander("Upload a foto...", expanded=False)
-with my_expander:
-    uploaded_file = st.file_uploader("your image", type="jpg")
+
+form = st.form(key='my-form')
+picture = form.file_uploader("your image", type="jpg")
+#name = form.text_input('Enter your name')
+submit = form.form_submit_button('Create music with emotions!')
 
 
-
-if uploaded_file is not None:
-    #TODO clean the input from the userxc
-    image = Image.open(uploaded_file)
+if picture:
+    image = Image.open(picture)
     st.image(image, caption='Your Image.', width=100,  use_column_width=False)
-    flag = True
-    
-if flag is True:
-    st.button('Create music from foto!')
-    flag_call_program = True
-    #st.balloons()
+    test_ = Runprograma(image)
+    st.write(test_.run())
+if submit:
 
-if flag_call_program is True:
-   our_test = test.get_notes_from_emotion('happy')
-   #returns a MIDI file
-   flag_play = True
-  
-if flag_play is True:
-    st.button('Play music from foto!')
+    #run_program = Runprogram(picture)
+    #st.write(run_program.run())
+    #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
     audio_file = open('chopin.ogg', 'rb')
     audio_bytes = audio_file.read()
     st.audio(audio_bytes, format='audio/ogg')
+
 

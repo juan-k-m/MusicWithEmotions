@@ -21,11 +21,9 @@ class Runprograma:
    #RUN
     def run(self):
         self.process_picture()
-        print(self.cleanedpicture)
-        
-        #self.predict_emotion() 
-        #self.get_initial_notes() 
-        #return self.make_music() 
+        self.predict_emotion() 
+        self.get_initial_notes() 
+        print(self.make_music()) 
         return 'runing...'
 
 
@@ -40,7 +38,7 @@ class Runprograma:
    #TODO pass the predicted emotion to the encoder to retieve the first 
    #musical notes
     def get_initial_notes(self):
-        self.initialnotes = self.encoder(self.emotion)
+        self.initialnotes = self.encoder.encode_emotion(self.emotion)
 
    #TODO pass the first notes to de model to retrieve the composition
     def make_music(self):
