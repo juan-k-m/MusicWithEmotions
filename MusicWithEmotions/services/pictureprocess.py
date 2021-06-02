@@ -4,8 +4,8 @@ Fer model'''
 
 class Pictureprocess:
 
-	def __init__(self,picture):
-		self.picture = picture
-
-	def cleanpicture(self):
+	def __init__(self):
 		pass
+
+	def cleanpicture(self, picture):
+		return 'picture cleaning...'
