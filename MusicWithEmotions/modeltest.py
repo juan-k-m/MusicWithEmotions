@@ -78,7 +78,7 @@ def get_train_test_data(df):
 
 
 
-def create_model(X_train, y_train):
+def create_model():
     model = Sequential()
     #model.add(Rescaling(1./255, input_shape=(48,48,1)))
 
