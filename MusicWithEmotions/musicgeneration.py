@@ -7,6 +7,9 @@ class Musicgeneration:
         self.music_helper = Music()
     def get_notes_from_emotion(self, emotion):
         return self.music_helper.get_modes_to_chords()
+
+    def callmagenta(self, initialnotes):
+        return 'MIDI-FILE' #self.music_helper.get_modes_to_chords()
     
 if __name__ == '__main__':
 	test = Musicgeneration()
