@@ -80,4 +80,4 @@ class Musicgeneration:
 
 if __name__ == '__main__':
 	test = Musicgeneration()
-	print (test.make_music())
+	print (test.get_notes_from_emotion())
