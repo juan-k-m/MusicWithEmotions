@@ -1,5 +1,4 @@
 import streamlit as st
-from MusicWithEmotions.musicgeneration import Musicgeneration
 
 import altair as alt
 
@@ -9,8 +8,6 @@ import numpy as np
 import pandas as pd
 from numpy import random
 
-
-test = Musicgeneration()
 
 image = Image.open('mwe_logo.PNG')
 st.image(image, use_column_width=True)
@@ -41,16 +38,10 @@ with my_expander:
     uploaded_file = st.file_uploader("your image", type="jpg")
 
 
-
 if uploaded_file is not None:
-    #TODO clean the input from the userxc
-    st.write(type(uploaded_file))
-    st.write(uploaded_file.__dict__)
     image = Image.open(uploaded_file)
     st.image(image, caption='Your Image.', width=500,  use_column_width=False)
     st.write("Recognizing emotion...")
-   
-    
 
     # fake algorithm
     #@st.cache
@@ -79,9 +70,7 @@ instruments = st.sidebar.multiselect("choose instrument",
 #st.write('You selected:', options)
 
 if st.button('Create music from foto!'):
-    our_test = test.get_notes_from_emotion('happy')
-    st.write(our_test)
-    #st.balloons()
+    st.balloons()
 
 if st.button('Play music from foto!'):
     audio_file = open('chopin.ogg', 'rb')
