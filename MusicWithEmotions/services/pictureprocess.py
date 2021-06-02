@@ -3,9 +3,8 @@ order to retrive the requirements need it for the
 Fer model'''
 
 class Pictureprocess:
+    def __init__(self):
+        pass
 
-	def __init__(self):
-		pass
-
-	def cleanpicture(self, picture):
-		return 'picture cleaning...'
+    def cleanpicture(self, picture):
+        return 'picture cleaning...'

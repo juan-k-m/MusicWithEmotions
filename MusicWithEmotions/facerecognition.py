@@ -1,5 +1,5 @@
 '''Class for make all the processing of the image'''
-class Fer:
+class Facerecognition:
     def __init__(self):
         pass
 

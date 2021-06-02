@@ -1,15 +1,15 @@
-from MusicWithEmotions.fer import Fer
-from MusicWithEmotions.encoder import Encoder
+from MusicWithEmotions.facerecognition import Facerecognition
+from MusicWithEmotions.encoderemotion import Encoderemotion
 from MusicWithEmotions.musicgeneration import Musicgeneration
 from MusicWithEmotions.services.pictureprocess import Pictureprocess
 
 
 '''This class is going to control the entire application process'''
-class Runprogram:
+class Runprograma:
    
     def __init__(self, picture):
-        self.fer = Fer()
-        self.encoder = Encoder()
+        self.fer = Facerecognition()
+        self.encoder = Encoderemotion()
         self.musicgeneration = Musicgeneration()
         self.picturehelper = Pictureprocess()
         self.emotion = None
@@ -21,8 +21,8 @@ class Runprogram:
    #RUN
     def run(self):
         self.process_picture()
-        print(self.cleanedpicture) 
-        print(self.fer.test())
+        print(self.cleanedpicture)
+        
         #self.predict_emotion() 
         #self.get_initial_notes() 
         #return self.make_music() 
@@ -48,5 +48,5 @@ class Runprogram:
 
 if __name__ == '__main__':
     picture = ''
-    test = Runprogram(picture)
+    test = Runprograma(picture)
     print(test.run())
