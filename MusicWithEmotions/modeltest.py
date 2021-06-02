@@ -71,8 +71,13 @@ def get_train_test_data(df):
     y_train = to_categorical(y_train, num_classes=7)
     y_test = to_categorical(y_test, num_classes=7)
 
+    X_train = np.expand_dims(X_train, axis = -1)
+    X_train = np.expand_dims(X_train, axis = -1)
+    
     X_train = X_train / 255.
     X_test = X_test / 255.
+
+    
 
     return (X_train, X_test, y_train, y_test)
 
