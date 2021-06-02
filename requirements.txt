@@ -31,8 +31,8 @@ termcolor
 
 # Image recognition
 #deepface
-OpenCv
-opencv-python
+#OpenCv
+#opencv-python
 #Midi files
 #mido==1.2.6
 
