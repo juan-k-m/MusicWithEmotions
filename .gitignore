@@ -6,3 +6,5 @@ raw_data/
 **/__pycache__/
 .env
 *.jpg
+*.mag
+musmodel/
