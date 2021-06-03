@@ -54,7 +54,7 @@ if picture:
     st.write(type(midi))
     st.write(midi.lower())
     st.write("Testing...")
-    audio_file_mid = open('ui/test_sound.mid', 'rb')
+    audio_file_mid = open('ui/test.mid', 'rb')
     audio_bytes_mid = audio_file_mid.read()
     st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)    
 
