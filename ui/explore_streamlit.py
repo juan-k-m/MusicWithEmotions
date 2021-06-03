@@ -14,8 +14,8 @@ from numpy import random
 
 
 
-image = Image.open('ui/mwe_logo.PNG')
-st.image(image, use_column_width=True)
+#image = Image.open('ui/mwe_logo.PNG')
+#st.image(image, use_column_width=True)
 
 
 

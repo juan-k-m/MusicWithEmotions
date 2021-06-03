@@ -55,7 +55,6 @@ class Magentamodel:
 
     def load_model(self):
         root_dir = self.get_root_dir()
-   
         model_location = os.path.join(root_dir,"MusicWithEmotions","services","magmodels","basic_rnn.mag")
         #bundle = sequence_generator_bundle.read_bundle_file('services/magmodels/basic_rnn.mag')
         bundle = sequence_generator_bundle.read_bundle_file(model_location)
@@ -85,7 +84,7 @@ class Magentamodel:
         basename = self.emotion + today + '.mid'
         midi_location = os.path.join(root_dir,"ui","midi", basename)
 
-        note_seq.sequence_proto_to_midi_file(self.midicreated,midi_location)
+        note_seq.sequence_proto_to_midi_file(self.midicreated, midi_location)
         return basename
         #return self.midicreated
 

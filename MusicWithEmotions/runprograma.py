@@ -47,4 +47,5 @@ class Runprograma:
 if __name__ == '__main__':
     picture = ''
     test = Runprograma(picture)
-    print(test.run())
+    test.run()
+    print('done!')
