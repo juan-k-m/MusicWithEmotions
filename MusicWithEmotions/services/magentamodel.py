@@ -7,7 +7,7 @@ from note_seq.protobuf import music_pb2
 from note_seq.protobuf import music_pb2
 import note_seq
 from midi2audio import FluidSynth
-
+import os
 
 
 '''class created tpo interact with the magenta model'''
@@ -16,8 +16,17 @@ class Magentamodel:
     def __init__(self):
     	self.basicsequence = None
     	self.model = None
+    	self.midicreated = None
     
-    def make_music(self):
+    def get_generated_midi_file(self):
+        self.create_sequence()
+        self.load_model()
+        self.generate_music()
+        return self.transform_seq_to_midi()
+
+
+
+    def generate_music(self):
         input_sequence = self.basicsequence # change this to teapot if you want
         num_steps = 128 # change this for shorter or longer sequences
         temperature = 1.0 # the higher the temperature the more random the sequence.
@@ -36,11 +45,16 @@ class Magentamodel:
           end_time=total_seconds)
 
         # Ask the model to continue the sequence.
-        return self.model.generate(input_sequence, generator_options)
+        self.midicreated =  self.model.generate(input_sequence, generator_options)
         
 
     def load_model(self):
-        bundle = sequence_generator_bundle.read_bundle_file('magmodels/basic_rnn.mag')
+        cwd = os.getcwd()
+        root_dir = os.path.join(cwd)
+   
+        model_location = os.path.join(root_dir,"MusicWithEmotions","services","magmodels","basic_rnn.mag")
+        #bundle = sequence_generator_bundle.read_bundle_file('services/magmodels/basic_rnn.mag')
+        bundle = sequence_generator_bundle.read_bundle_file(model_location)
         generator_map = melody_rnn_sequence_generator.get_generator_map()
         melody_rnn = generator_map['basic_rnn'](checkpoint=None, bundle=bundle)
         melody_rnn.initialize()
@@ -49,16 +63,16 @@ class Magentamodel:
     def create_sequence(self, basicnotes=None):
         twinkle_twinkle = music_pb2.NoteSequence()
         # Add the notes to the sequence.
-        twinkle_twinkle.notes.add(pitch=60, start_time=0.0, end_time=0.5, velocity=80)
-        twinkle_twinkle.notes.add(pitch=60, start_time=0.5, end_time=1.0, velocity=80)
-        twinkle_twinkle.notes.add(pitch=67, start_time=1.0, end_time=1.5, velocity=80)
-        twinkle_twinkle.notes.add(pitch=67, start_time=1.5, end_time=2.0, velocity=80)
+        twinkle_twinkle.notes.add(pitch=60, start_time=0.0, end_time=0.5, velocity=90)
+        twinkle_twinkle.notes.add(pitch=70, start_time=0.5, end_time=1.0, velocity=90)
+        twinkle_twinkle.notes.add(pitch=80, start_time=1.0, end_time=1.5, velocity=90)
+        twinkle_twinkle.notes.add(pitch=90, start_time=1.5, end_time=2.0, velocity=90)
         twinkle_twinkle.total_time = 8
         twinkle_twinkle.tempos.add(qpm=60)
         self.basicsequence =  twinkle_twinkle
 
-    def transform_seq_to_midi(self,sequence):
-    	note_seq.sequence_proto_to_midi_file(sequence,'test.mid')
+    def transform_seq_to_midi(self):
+    	return note_seq.sequence_proto_to_midi_file(self.midicreated,'test_2.mid')
 
 
 if __name__ == '__main__':

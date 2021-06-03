@@ -50,7 +50,13 @@ if picture:
     image = Image.open(picture)
     st.image(image, caption='Your Image.', width=100,  use_column_width=False)
     test_ = Runprograma(image)
-    st.write(test_.run())
+    midi = test_.run()
+    st.write(type(midi))
+    st.write("Testing")
+    audio_file_mid = open('ui/test_2.mid', 'rb')
+    audio_bytes_mid = audio_file_mid.read()
+    st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)    
+
 
 if submit:
 

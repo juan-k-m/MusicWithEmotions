@@ -23,8 +23,8 @@ class Runprograma:
         self.process_picture()
         self.predict_emotion() 
         self.get_initial_notes() 
-        print(self.make_music()) 
-        return 'runing...'
+        return self.make_music()
+        
 
 
    #TODO clean the picture
