@@ -6,11 +6,11 @@ from tensorflow.keras import Sequential, layers
 from tensorflow.keras import optimizers
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.layers.experimental.preprocessing import Rescaling
-from tensorflow.keras.optimizers.schedules import ExponentialDecay
+#from tensorflow.keras.optimizers.schedules import ExponentialDecay
 from MusicWithEmotions.data import get_train_test_data
 import joblib
 import mlflow
-from memoized_property import memoized_property
+#from memoized_property import memoized_property
 from google.cloud import storage
 
 
@@ -30,6 +30,7 @@ def create_model(X_train, y_train):
     #reg_l1_l2 = regularizers.l1_l2(l1=0.005, l2=0.0005)
 
     model.add(layers.Conv2D(32, kernel_size=(3,3), padding='same',activation='relu'))
+    model.add(layers.Conv2D(32, kernel_size=(3,3), padding='same',activation='relu'))
     model.add(layers.MaxPooling2D(3))
 
 
@@ -42,15 +43,10 @@ def create_model(X_train, y_train):
     model.add(layers.Dropout(0.3))
 
     model.add(layers.Flatten())
-    model.add(layers.Dense(256, activation='relu'))
+    model.add(layers.Dense(1024, activation='relu'))
     model.add(layers.Dropout(0.5))
 
     model.add(layers.Dense(7, activation='softmax'))
-    
-    opt = optimizers.Adam(learning_rate=1e-4)
-    model.compile(loss='categorical_crossentropy',
-                  optimizer=opt,
-                  metrics=['accuracy'])
 
     return model
 
