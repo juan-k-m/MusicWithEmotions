@@ -42,7 +42,7 @@ class Runprograma:
 
    #TODO pass the first notes to de model to retrieve the composition
     def make_music(self):
-        return self.musicgeneration.callmagenta(self.initialnotes)
+        return self.musicgeneration.callmagenta(self.initialnotes,self.emotion)
 
 if __name__ == '__main__':
     picture = ''

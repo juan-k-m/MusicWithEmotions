@@ -4,4 +4,4 @@ class Facerecognition:
         pass
 
     def predict_emotion(self, picture):
-        return 'predicting emotion running...'
+        return 'happy'

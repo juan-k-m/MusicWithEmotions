@@ -52,8 +52,9 @@ if picture:
     test_ = Runprograma(image)
     midi = test_.run()
     st.write(type(midi))
-    st.write("Testing")
-    audio_file_mid = open('ui/test_2.mid', 'rb')
+    st.write(midi.lower())
+    st.write("Testing...")
+    audio_file_mid = open('ui/midi/default2021-06-03-15-27-08.mid', 'r')
     audio_bytes_mid = audio_file_mid.read()
     st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)    
 

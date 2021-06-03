@@ -4,7 +4,7 @@ from magenta.models.shared import sequence_generator_bundle
 from note_seq.protobuf import generator_pb2
 from note_seq.protobuf import music_pb2
 
-from note_seq.protobuf import music_pb2
+import datetime
 import note_seq
 from midi2audio import FluidSynth
 import os
@@ -14,9 +14,14 @@ import os
 class Magentamodel:
 
     def __init__(self):
-    	self.basicsequence = None
-    	self.model = None
-    	self.midicreated = None
+        self.initialnotes = None
+        self.model = None
+        self.midicreated = None
+        self.emotion = 'default'
+
+    def get_root_dir(self):
+        cwd = os.getcwd()
+        return os.path.join(cwd)
     
     def get_generated_midi_file(self):
         self.create_sequence()
@@ -27,7 +32,7 @@ class Magentamodel:
 
 
     def generate_music(self):
-        input_sequence = self.basicsequence # change this to teapot if you want
+        input_sequence = self.initialnotes # change this to teapot if you want
         num_steps = 128 # change this for shorter or longer sequences
         temperature = 1.0 # the higher the temperature the more random the sequence.
 
@@ -49,8 +54,7 @@ class Magentamodel:
         
 
     def load_model(self):
-        cwd = os.getcwd()
-        root_dir = os.path.join(cwd)
+        root_dir = self.get_root_dir()
    
         model_location = os.path.join(root_dir,"MusicWithEmotions","services","magmodels","basic_rnn.mag")
         #bundle = sequence_generator_bundle.read_bundle_file('services/magmodels/basic_rnn.mag')
@@ -69,10 +73,21 @@ class Magentamodel:
         twinkle_twinkle.notes.add(pitch=90, start_time=1.5, end_time=2.0, velocity=90)
         twinkle_twinkle.total_time = 8
         twinkle_twinkle.tempos.add(qpm=60)
-        self.basicsequence =  twinkle_twinkle
+        self.initialnotes =  twinkle_twinkle
 
     def transform_seq_to_midi(self):
-    	return note_seq.sequence_proto_to_midi_file(self.midicreated,'test_2.mid')
+
+        e = datetime.datetime.now()
+
+        root_dir = self.get_root_dir()
+       
+        today = str(e.strftime("%Y-%m-%d-%H-%M-%S"))
+        basename = self.emotion + today + '.mid'
+        midi_location = os.path.join(root_dir,"ui","midi", basename)
+
+        note_seq.sequence_proto_to_midi_file(self.midicreated,midi_location)
+        return basename
+        #return self.midicreated
 
 
 if __name__ == '__main__':
@@ -82,6 +97,6 @@ if __name__ == '__main__':
     test.load_model()
     print(type(test.create_sequence()))
     #seq = test.create_sequence()
-    #midi = test.transform_seq_to_midi(test.basicsequence)
+    #midi = test.transform_seq_to_midi(test.initialnotes)
 
     

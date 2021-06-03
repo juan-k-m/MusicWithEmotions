@@ -10,8 +10,12 @@ class Musicgeneration:
 
     def get_notes_from_emotion(self, emotion):
         return self.music_helper.get_modes_to_chords()
-
-    def callmagenta(self, initialnotes):
+    '''generates the composition with the base notes
+    and also pass the emotion'''
+    def callmagenta(self, initialnotes, emotion):
+        #define attr in the magentamodel: -> emotion,
+        self.music_helper.initialnotes = initialnotes 
+        self.music_helper.emotion = emotion 
         return self.magentamodel.get_generated_midi_file()
     
 if __name__ == '__main__':
