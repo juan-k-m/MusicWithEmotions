@@ -14,8 +14,8 @@ class Musicgeneration:
     and also pass the emotion'''
     def callmagenta(self, initialnotes, emotion):
         #define attr in the magentamodel: -> emotion,
-        self.music_helper.initialnotes = initialnotes 
-        self.music_helper.emotion = emotion 
+        self.magentamodel.initialnotes = initialnotes 
+        self.magentamodel.emotion = emotion 
         return self.magentamodel.get_generated_midi_file()
     
 if __name__ == '__main__':

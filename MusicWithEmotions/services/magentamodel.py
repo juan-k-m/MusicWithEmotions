@@ -14,7 +14,7 @@ import os
 class Magentamodel:
 
     def __init__(self):
-        self.initialnotes = None#[60, 61, 63, 65, 67, 56, 58]
+        self.initialnotes = None 
         self.model = None
         self.midicreated = None
         self.emotion = 'default'

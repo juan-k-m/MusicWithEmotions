@@ -3,19 +3,17 @@ from MusicWithEmotions.runprograma import Runprograma
 from MusicWithEmotions.facerecognition import Facerecognition
 from MusicWithEmotions.musicgeneration import Musicgeneration
 from MusicWithEmotions.encoderemotion import Encoderemotion
-import altair as alt
 
 from midi2audio import FluidSynth 
 
 from PIL import Image
 import numpy as np
 import pandas as pd
-from numpy import random
 
 
 
-#image = Image.open('ui/mwe_logo.PNG')
-#st.image(image, use_column_width=True)
+image = Image.open('ui/mwe_logo.PNG')
+st.image(image, use_column_width=True)
 
 
 
@@ -27,13 +25,10 @@ from numpy import random
 #emotions_list = ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
 
 st.markdown("""
-
 ## Lets create some music
-
 #### just upload an image or shoot a foto to create your **individual** song
 ###
 ###
-
 """)
 
 
@@ -49,23 +44,11 @@ submit = form.form_submit_button('Create music with emotions!')
 if picture:
     image = Image.open(picture)
     st.image(image, caption='Your Image.', width=100,  use_column_width=False)
-    #test_ = Runprograma(image)
-    #midi = test_.run()
-    #st.write(type(midi))
-    #st.write(midi.lower())
-    st.write("Testing...")
-    tes_midi_file = 'default2021-06-03-17-44-15.mid'
-    #testing the tranform of the midi file in to wav 
-    #fs = FluidSynth()
-    #fs.midi_to_audio('midi/'+ tes_midi_file, 'test_player.wav')
-
-    #st.audio('test_player.wav', format='audio/ogg', start_time=0)
-    #st.markdown("   You like the song? Download it by right-clicking on the player")
-
-
-    #audio_file_mid = open('ui/test.mid', 'rb')
-    #audio_bytes_mid = audio_file_mid.read()
-    #st.audio('testing_converte.wav', format='audio/ogg', start_time=0)    
+    test_ = Runprograma(image)
+    midi = test_.run()
+    st.write(type(midi))
+    st.write(midi.lower())
+ 
 
 
 if submit:
@@ -74,13 +57,17 @@ if submit:
     #st.write(run_program.run())
     #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
 
-    st.write("here we play wav")
-    #audio_file_wav = open('testing_converte.wav', 'rb')
-    #audio_bytes_wav = audio_file_wav.read()
-    st.audio('testing_converte.wav', format='audio/wav', start_time=0)
+    midi_file_path = f"ui/midi/{midi}"
+    wave_file_path = midi_file_path.replace(".mid",".wav")
 
-    #st.write("here we play mid")
-    #audio_file_mid = open('ui/test_sound.mid', 'rb')
-    #audio_bytes_mid = audio_file_mid.read()
-    #st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)
-    
+    fs = FluidSynth()
+    fs.midi_to_audio(midi_file_path, wave_file_path)
+
+    st.write("here we test the easy way")
+    st.audio(wave_file_path, format='audio/ogg', start_time=0)
+    st.markdown("   You like the song? Download it by right-clicking on the player")
+
+    st.write("here we test the way with the opener")
+    audio_file_wav = open(wave_file_path, 'rb')
+    audio_bytes_wav = audio_file_wav.read()
+    st.audio(audio_bytes_wav, format='audio/wav', start_time=0)
