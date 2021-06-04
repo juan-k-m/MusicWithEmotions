@@ -20,10 +20,10 @@ class Runprograma:
 
    #RUN
     def run(self):
-        self.process_picture()
+        #self.process_picture()
         self.predict_emotion() 
         self.get_initial_notes() 
-        return self.make_music()
+        return self.make_music(), self.emotion
         
 
 
@@ -33,7 +33,7 @@ class Runprograma:
 
    #TODO pass the picture to the model for predict the emotion
     def predict_emotion(self):
-        self.emotion = self.fer.predict_emotion(self.cleanedpicture)
+        self.emotion = self.fer.image_to_emotion(self.picture)
 
    #TODO pass the predicted emotion to the encoder to retieve the first 
    #musical notes
