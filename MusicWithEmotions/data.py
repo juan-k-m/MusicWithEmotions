@@ -1,15 +1,24 @@
 import pandas as pd
 import numpy as np
 from tensorflow.keras.utils import to_categorical
-
-AWS_BUCKET_PATH = ""
-
+from google.cloud import storage
 
 def get_data():
-    if len(AWS_BUCKET_PATH) > 0:
-        df = pd.read_csv(AWS_BUCKET_PATH)
+    
+    bucket_name = 'wagon-data-606-totino'  #  to be set to personal bucket
+    source_blob_name = 'MusicWithEmotions/export.csv'  #  to be set to personal path to file_to_load
+    destination_file_name = '/tmp/tmp_download.csv'
+       
+    if len(bucket_name) > 0 and len(source_blob_name) > 0 :
+        storage_client = storage.Client('wagon-bootcamp-310515')  #  to be set to personal project ID
+        bucket = storage_client.bucket(bucket_name)
+        blob = bucket.blob(source_blob_name)
+        blob.download_to_filename(destination_file_name)
+        
+        df = pd.read_csv(destination_file_name)
     else:
-        df = pd.read_csv('../raw_data/icml_face_data')
+        df = pd.read_csv('../raw_data/icml_face_data.csv')
+        
     return df
 
 
