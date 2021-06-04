@@ -8,6 +8,7 @@ wheel>=0.29
 numpy
 pandas
 scikit-learn
+Keras==2.4.3
 
 # tests/linter
 black
@@ -32,7 +33,7 @@ termcolor
 # Image recognition
 #deepface
 # OpenCv
-opencv-python
+opencv-python==4.5.2.52
 #Midi files
 #mido==1.2.6
 
