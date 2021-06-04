@@ -40,5 +40,6 @@ if __name__ == '__main__':
     img_preproc = user_pic_preproc(img) 
     print(img_preproc.shape)
     model = load_trained_model('../rawdata/model_65') # to be checked cause no tensorflow on my machine
-    predict_emotion(model, img_preproc)
-    print(res)
+    print(model)
+    # res = predict_emotion(model, img_preproc)
+    # print(res)
