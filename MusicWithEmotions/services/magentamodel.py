@@ -14,10 +14,11 @@ import os
 class Magentamodel:
 
     def __init__(self):
-        self.initialnotes = None
+        self.initialnotes = None#[60, 61, 63, 65, 67, 56, 58]
         self.model = None
         self.midicreated = None
         self.emotion = 'default'
+        self.sequence = None
 
     def get_root_dir(self):
         cwd = os.getcwd()
@@ -32,7 +33,7 @@ class Magentamodel:
 
 
     def generate_music(self):
-        input_sequence = self.initialnotes # change this to teapot if you want
+        input_sequence = self.sequence # change this to teapot if you want
         num_steps = 128 # change this for shorter or longer sequences
         temperature = 1.0 # the higher the temperature the more random the sequence.
 
@@ -63,7 +64,7 @@ class Magentamodel:
         melody_rnn.initialize()
         self.model = melody_rnn
     
-    def create_sequence(self, basicnotes=None):
+    def create_sequence_testing(self, basicnotes=None):
         twinkle_twinkle = music_pb2.NoteSequence()
         # Add the notes to the sequence.
         twinkle_twinkle.notes.add(pitch=60, start_time=0.0, end_time=0.5, velocity=90)
@@ -73,6 +74,24 @@ class Magentamodel:
         twinkle_twinkle.total_time = 8
         twinkle_twinkle.tempos.add(qpm=60)
         self.initialnotes =  twinkle_twinkle
+
+    def create_sequence(self, basicnotes=None):
+        sequence = music_pb2.NoteSequence()
+        
+        for index,note in enumerate(self.initialnotes):
+
+        	#put each note into the squence
+        	#if it is the first note:
+        	if index == 0:
+        	    sequence.notes.add(pitch=note, start_time=0.0, end_time=0.5, velocity=90)
+        	else:
+        		sequence.notes.add(pitch=note, start_time=float(index-1), end_time=float(index-0.5), velocity=90)
+        
+
+        sequence.total_time = int(len(self.initialnotes)/2)
+        sequence.tempos.add(qpm=60);
+        
+        self.sequence = sequence
 
     def transform_seq_to_midi(self):
 
@@ -88,14 +107,19 @@ class Magentamodel:
         return basename
         #return self.midicreated
 
+    def test_utils(self):
+        for number in range(8):
+            print(float(number-1), float(number-0.5))
 
 if __name__ == '__main__':
 
     test = Magentamodel()
-    test.create_sequence()
-    test.load_model()
-    print(type(test.create_sequence()))
+    #test.test_utils()
+    #test.create_sequence()
+    #test.load_model()
+    #print(type(test.create_sequence()))
     #seq = test.create_sequence()
-    #midi = test.transform_seq_to_midi(test.initialnotes)
+    midi = test.get_generated_midi_file()
+    print(midi)
 
     

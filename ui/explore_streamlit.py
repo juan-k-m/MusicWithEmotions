@@ -49,14 +49,23 @@ submit = form.form_submit_button('Create music with emotions!')
 if picture:
     image = Image.open(picture)
     st.image(image, caption='Your Image.', width=100,  use_column_width=False)
-    test_ = Runprograma(image)
-    midi = test_.run()
-    st.write(type(midi))
-    st.write(midi.lower())
+    #test_ = Runprograma(image)
+    #midi = test_.run()
+    #st.write(type(midi))
+    #st.write(midi.lower())
     st.write("Testing...")
-    audio_file_mid = open('ui/test.mid', 'rb')
-    audio_bytes_mid = audio_file_mid.read()
-    st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)    
+    tes_midi_file = 'default2021-06-03-17-44-15.mid'
+    #testing the tranform of the midi file in to wav 
+    #fs = FluidSynth()
+    #fs.midi_to_audio('midi/'+ tes_midi_file, 'test_player.wav')
+
+    #st.audio('test_player.wav', format='audio/ogg', start_time=0)
+    #st.markdown("   You like the song? Download it by right-clicking on the player")
+
+
+    #audio_file_mid = open('ui/test.mid', 'rb')
+    #audio_bytes_mid = audio_file_mid.read()
+    #st.audio('testing_converte.wav', format='audio/ogg', start_time=0)    
 
 
 if submit:
@@ -66,12 +75,12 @@ if submit:
     #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
 
     st.write("here we play wav")
-    audio_file_wav = open('ui/night_piano.wav', 'rb')
-    audio_bytes_wav = audio_file_wav.read()
-    st.audio(audio_bytes_wav, format='audio/wav', start_time=0)
+    #audio_file_wav = open('testing_converte.wav', 'rb')
+    #audio_bytes_wav = audio_file_wav.read()
+    st.audio('testing_converte.wav', format='audio/wav', start_time=0)
 
-    st.write("here we play mid")
-    audio_file_mid = open('ui/test_sound.mid', 'rb')
-    audio_bytes_mid = audio_file_mid.read()
-    st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)
+    #st.write("here we play mid")
+    #audio_file_mid = open('ui/test_sound.mid', 'rb')
+    #audio_bytes_mid = audio_file_mid.read()
+    #st.audio(audio_bytes_mid, format='audio/ogg', start_time=0)
     

@@ -8,7 +8,7 @@ from midi2audio import FluidSynth
 
 
 fs = FluidSynth()
-fs.midi_to_audio('abba_dq.mid', 'abba_dq.wav')
+fs.midi_to_audio('test.mid', 'testing_converte.wav')
 
-st.audio('abba_dq.wav', format='audio/ogg', start_time=0)
+st.audio('testing_converte.wav', format='audio/ogg', start_time=0)
 st.markdown("   You like the song? Download it by right-clicking on the player")

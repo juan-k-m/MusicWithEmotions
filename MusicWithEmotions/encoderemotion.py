@@ -6,9 +6,9 @@ class Encoderemotion:
     def __init__(self):
         self.music_helper = Music()
     def encode_emotion(self, emotion):
-        return f'emotion being encoding {emotion}'
+        return self.music_helper.list_of_notes(emotion)
 
     
 if __name__ == '__main__':
 	test = Encoderemotion()
-	print (test.encode_emotion('happy'))
+	print (test.encode_emotion('sad'))
