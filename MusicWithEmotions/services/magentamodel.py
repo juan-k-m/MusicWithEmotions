@@ -3,7 +3,7 @@ from magenta.models.melody_rnn import melody_rnn_sequence_generator
 from magenta.models.shared import sequence_generator_bundle
 from note_seq.protobuf import generator_pb2
 from note_seq.protobuf import music_pb2
-
+from MusicWithEmotions.services.sequencemaker import Sequencemaker
 import datetime
 import note_seq
 from midi2audio import FluidSynth
@@ -19,6 +19,7 @@ class Magentamodel:
         self.midicreated = None
         self.emotion = 'default'
         self.sequence = None
+        self.sequencemaker = Sequencemaker()
 
     def get_root_dir(self):
         cwd = os.getcwd()
@@ -33,10 +34,10 @@ class Magentamodel:
 
 
     def generate_music(self):
-        input_sequence = self.sequence # change this to teapot if you want
-        num_steps = 128 # change this for shorter or longer sequences
-        temperature = 1.0 # the higher the temperature the more random the sequence.
-
+        input_sequence = self.sequencemaker.create(self.emotion) # change this to teapot if you want
+        
+        num_steps = 60 #was 128 change this for shorter or longer sequences
+        temperature = 1
         # Set the start time to begin on the next step after the last note ends.
         last_end_time = (max(n.end_time for n in input_sequence.notes)
                           if input_sequence.notes else 0)
