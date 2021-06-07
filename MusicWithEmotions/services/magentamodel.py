@@ -1,6 +1,6 @@
 # Import dependencies.
 from magenta.models.melody_rnn import melody_rnn_sequence_generator
-from magenta.models.improv_rnn import improv_rnn
+from magenta.models.improv_rnn import improv_rnn_sequence_generator
 from magenta.models.shared import sequence_generator_bundle
 from note_seq.protobuf import generator_pb2
 from note_seq.protobuf import music_pb2
