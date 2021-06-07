@@ -53,7 +53,8 @@ if submit:
     fs.midi_to_audio(midi_file_path, wave_file_path)
 
     st.audio(wave_file_path, format='audio/ogg', start_time=0)
-    #st.markdown("   You like the song? Download it by right-clicking on the player")
+    st.markdown(
+        "   You like the song? Download it by right-clicking on the player")
 
     if st.button('Delete generated files'):
         os.remove(midi_file_path)
