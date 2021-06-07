@@ -27,20 +27,20 @@ class Runprograma:
         
 
 
-   #TODO clean the picture
+   #cleaning the picture
     def process_picture(self):
         self.cleanedpicture = self.picturehelper.cleanpicture(self.picture) 
 
-   #TODO pass the picture to the model for predict the emotion
+   #passing the picture to the model for predict the emotion
     def predict_emotion(self):
         self.emotion = self.fer.image_to_emotion(self.picture)
 
-   #TODO pass the predicted emotion to the encoder to retieve the first 
+   #passing the predicted emotion to the encoder to retieve the first 
    #musical notes
     def get_initial_notes(self):
         self.initialnotes = self.encoder.encode_emotion(self.emotion)
 
-   #TODO pass the first notes to de model to retrieve the composition
+   #passing the first notes to de model to retrieve the composition
     def make_music(self):
         return self.musicgeneration.callmagenta(self.initialnotes,self.emotion)
 
