@@ -1,4 +1,3 @@
-# Import dependencies.
 from magenta.models.melody_rnn import melody_rnn_sequence_generator
 from magenta.models.improv_rnn import improv_rnn_sequence_generator
 from magenta.models.shared import sequence_generator_bundle
@@ -10,9 +9,9 @@ import note_seq
 from midi2audio import FluidSynth
 import os
 
-
-'''class created tpo interact with the magenta model'''
-class Magentamodel:
+'''Class for load and create music with improv_rnn magenta model'''
+# Import dependencies.
+class Magentaimprov:
 
     def __init__(self):
         self.initialnotes = None 
@@ -61,8 +60,8 @@ class Magentamodel:
         model_location = os.path.join(root_dir,"MusicWithEmotions","services","magmodels","attention_rnn.mag")
         #bundle = sequence_generator_bundle.read_bundle_file('services/magmodels/basic_rnn.mag')
         bundle = sequence_generator_bundle.read_bundle_file(model_location)
-        generator_map = melody_rnn_sequence_generator.get_generator_map()
-        melody_rnn = generator_map['attention_rnn'](checkpoint=None, bundle=bundle)
+        generator_map = improv_rnn_sequence_generator.get_generator_map()
+        melody_rnn = generator_map['attention_improv'](checkpoint=None, bundle=bundle)
         melody_rnn.initialize()
         self.model = melody_rnn
     
@@ -124,4 +123,5 @@ if __name__ == '__main__':
     midi = test.get_generated_midi_file()
     print(midi)
 
-    
+
+
