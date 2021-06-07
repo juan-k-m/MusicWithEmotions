@@ -1,15 +1,18 @@
 import streamlit as st
+from MusicWithEmotions.runprograma import Runprograma
+from MusicWithEmotions.facerecognition import Facerecognition
+from MusicWithEmotions.musicgeneration import Musicgeneration
+from MusicWithEmotions.encoderemotion import Encoderemotion
 
-import altair as alt
-
+from midi2audio import FluidSynth 
 
 from PIL import Image
 import numpy as np
 import pandas as pd
-from numpy import random
 
 
-image = Image.open('mwe_logo.PNG')
+
+image = Image.open('ui/mwe_logo.PNG')
 st.image(image, use_column_width=True)
 
 
@@ -19,102 +22,55 @@ st.image(image, use_column_width=True)
 #           "emotion": ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
 #         })
 
-emotions_list = ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
+#emotions_list = ["happy", "sad", "scared", "angry", "neutral", "surprised", "disgusted"]
 
 st.markdown("""
-
 ## Lets create some music
-
 #### just upload an image or shoot a foto to create your **individual** song
 ###
 ###
-
 """)
+
 
 
 # And within an expander
-my_expander = st.beta_expander("Upload a foto...", expanded=False)
-with my_expander:
-    uploaded_file = st.file_uploader("your image", type="jpg")
+
+form = st.form(key='my-form')
+picture = form.file_uploader("your image", type="jpg")
+#name = form.text_input('Enter your name')
+submit = form.form_submit_button('Create music with emotions!')
 
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption='Your Image.', width=500,  use_column_width=False)
-    st.write("Recognizing emotion...")
+if picture:
 
-    # fake algorithm
-    #@st.cache
-    random_number = random.randint(0, 7)
-    your_emotion = emotions_list[random_number]
-    #your_emotion = predict(uploaded_file)
-
-    st.write(f'i see you feel {your_emotion}')
-
-# into sidebar for elements
-# add_selectbox = st.sidebar.selectbox(
-#     "'choose instruments'",
-#     ('Guitar', 'Drums', 'Piano', 'Violin')
-# )
-
-instruments = st.sidebar.multiselect("choose instrument", 
-        ('Guitar', 'Drums', 'Piano', 'Violin')
-        )
-
-# instruments = ['Guitar', 'Drums', 'Piano', 'Violin']
-# options = st.multiselect(
-#    'choose instruments',
-#    instruments,
-#    instruments[:2]
-#    )
-#st.write('You selected:', options)
-
-if st.button('Create music from foto!'):
-    st.balloons()
-
-if st.button('Play music from foto!'):
-    audio_file = open('chopin.ogg', 'rb')
-    audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format='audio/ogg')
+    image = Image.open(picture)
+    img = np.array(image)
+    st.image(image, caption='Your Image.', width=300,  use_column_width=False)
+    test_ = Runprograma(img)
+    midi, emotion = test_.run()
+    st.write('')
+    st.write(f"Detected emotion: {emotion}")
+    st.write('')
+    #st.write(midi.lower())
+ 
 
 
-# select your emotional state without foto
+if submit:
 
-st.markdown("""
-##
-## You don't want to deal with pictures?
-#### Just select three emotional states that would describe how you feel right now
-# 
-""")
+    #run_program = Runprogram(picture)
+    #st.write(run_program.run())
+    #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
 
-# your_emotion = st.selectbox(
-#      'How do you feel right now?',
-#      emotions_list
-#         )
+    midi_file_path = f"ui/midi/{midi}"
+    wave_file_path = midi_file_path.replace(".mid",".wav")
 
-options = st.multiselect(
-   'how do you feel?',
-   emotions_list,
-   emotions_list[:2]
-   )
-#st.write('You selected:', your_emotion)
-st.markdown("""
-##
-""")
+    fs = FluidSynth()
+    fs.midi_to_audio(midi_file_path, wave_file_path)
 
-st.write(f'i see you feel **{options[0]}**, **{options[1]}** and **{options[2]}**')
+    st.audio(wave_file_path, format='audio/ogg', start_time=0)
+    st.markdown("   You like the song? Download it by right-clicking on the player")
 
-st.markdown("""
-##
-""")
-
-
-if st.button('Create music from selected emotions!'):
-    st.balloons()
-
-if st.button('Play music from selected emotions!'):
-    audio_file = open('chopin.ogg', 'rb')
-    audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format='audio/ogg')
-
-
+    #st.write("here we test the way with the opener")
+    #audio_file_wav = open(wave_file_path, 'rb')
+    #audio_bytes_wav = audio_file_wav.read()
+    #st.audio(audio_bytes_wav, format='audio/wav', start_time=0)
