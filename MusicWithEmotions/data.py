@@ -1,13 +1,19 @@
 import pandas as pd
 import numpy as np
-from tensorflow.keras.utils import to_categorical
+#from tensorflow.keras.utils import to_categorical
 from google.cloud import storage
+import os
+
+
 
 def get_data_from_gcp(local = False):
 
     client = storage.Client('lewagon-bootcamp-310515')
     if local:
-        path = '../raw_data/icml_face_data.csv'
+        fd = os.open("/home/alexbabkf/code/AlexBabkf/MusicWithEmotions/", os.O_RDONLY )
+        os.fchdir(fd)
+        pwd = os.getcwd()
+        path = os.path.join(pwd,"raw_data", 'icml_face_data.csv')
     else:
         path = 'gs://musicwithemotions/Data/icml_face_data.csv'
 
@@ -52,8 +58,8 @@ def get_train_test_data(df):
 
     y_train = y_train - 1
     y_test = y_test - 1
-    y_train = to_categorical(y_train, num_classes=6)
-    y_test = to_categorical(y_test, num_classes=6)
+    #y_train = to_categorical(y_train, num_classes=6)
+    #y_test = to_categorical(y_test, num_classes=6)
 
     X_train = np.expand_dims(X_train, axis = -1)
     X_test = np.expand_dims(X_test, axis = -1)
@@ -68,5 +74,6 @@ def get_train_test_data(df):
 
 if __name__ == '__main__':
     df = get_data_from_gcp(local = True)
-    X_train, X_test, y_train, y_test = get_train_test_data(df)
-    print(X_train, X_test, y_train, y_test)
+    #df = clean_data(df)
+    #X_train, X_test, y_train, y_test = get_train_test_data(df)
+    print(df.head())
