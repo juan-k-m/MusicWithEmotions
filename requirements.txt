@@ -8,6 +8,7 @@ wheel>=0.29
 numpy
 pandas
 scikit-learn
+Keras==2.4.3
 
 # tests/linter
 black
@@ -29,7 +30,6 @@ memoized-property
 termcolor
 
 opencv-python
-
 magenta
 
 streamlit
