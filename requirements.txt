@@ -28,13 +28,13 @@ joblib
 memoized-property
 termcolor
 
-
-# Image recognition
-#deepface
-# OpenCv
 opencv-python
-#Midi files
-#mido==1.2.6
 
-#music generation
-#magenta
+magenta
+
+streamlit
+note_seq
+midi2audio
+
+fluidsynth
+numba==0.48.0

@@ -103,7 +103,7 @@ class Magentamodel:
        
         today = str(e.strftime("%Y-%m-%d-%H-%M-%S"))
         basename = self.emotion + today + '.mid'
-        midi_location = os.path.join(root_dir,"ui","midi", basename)
+        midi_location = os.path.join(root_dir,"midi", basename)
 
         note_seq.sequence_proto_to_midi_file(self.midicreated, midi_location)
         return basename

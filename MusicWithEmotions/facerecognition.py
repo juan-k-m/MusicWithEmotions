@@ -9,16 +9,22 @@ class Facerecognition:
     def __init__(self):
         pass
 
+    def get_root_dir(self):
+        cwd = os.getcwd()
+        return os.path.join(cwd)
+
     def image_to_emotion(self, image):
-    	img = self.user_pic_preproc(image)
-    	model = self.load_trained_model('/home/mona/code/juan-k-m/MusicWithEmotions/raw_data/model_65')
-    	emotion = self.predict_emotion(model, img)
-    	return emotion
+        img = self.user_pic_preproc(image)
+        path = os.path.join(self.get_root_dir(),"raw_data","model_65")
+        model = self.load_trained_model(path)
+        emotion = self.predict_emotion(model, img)
+        return emotion
 
 
     def user_pic_preproc(self,img, bor=0):
         '''convert user picture to grayscale, identify and extract the face and compress to 48 x 48 pixels'''
-        face_model = cv2.CascadeClassifier('/home/mona/code/juan-k-m/MusicWithEmotions/MusicWithEmotions/haarcascade_frontalface_default.xml')
+        path = os.path.join(self.get_root_dir(),"MusicWithEmotions","haarcascade_frontalface_default.xml")
+        face_model = cv2.CascadeClassifier(path)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_model.detectMultiScale(gray, 1.2, 15)
     
@@ -49,7 +55,7 @@ class Facerecognition:
         return predicted_emotion
 
     def test_model_load(self):
-    	pass
+        pass
 
 
 if __name__ == '__main__':
