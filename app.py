@@ -12,7 +12,7 @@ import pandas as pd
 
 
 
-image = Image.open('ui/mwe_logo.PNG')
+image = Image.open('image/mwe_logo.PNG')
 st.image(image, use_column_width=True)
 
 
@@ -67,7 +67,7 @@ if submit and picture:
     fs = FluidSynth()
     fs.midi_to_audio(midi_file_path, wave_file_path)
 
-    st.audio(wave_file_path, format='audio/ogg', start_time=0)
+    st.audio(wave_file_path, format='audio/wav', start_time=0)
     st.markdown("   You like the song? Download it by right-clicking on the player")
 
     #st.write("here we test the way with the opener")
