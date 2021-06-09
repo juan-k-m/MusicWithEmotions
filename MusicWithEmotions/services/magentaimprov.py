@@ -34,7 +34,7 @@ class Magentaimprov:
 
 
     def generate_music(self):
-        input_sequence = self.sequencemaker.create(self.emotion) # 
+        input_sequence = self.sequencemaker.create('happy') # 
         
         num_steps = 80 #was 128 change this for shorter or longer sequences
         temperature = 1.2
@@ -61,7 +61,7 @@ class Magentaimprov:
         #bundle = sequence_generator_bundle.read_bundle_file('services/magmodels/basic_rnn.mag')
         bundle = sequence_generator_bundle.read_bundle_file(model_location)
         generator_map = improv_rnn_sequence_generator.get_generator_map()
-        melody_rnn = generator_map['attention_improv'](checkpoint=None, bundle=bundle)
+        melody_rnn = generator_map['attention_rnn'](checkpoint=None, bundle=bundle)
         melody_rnn.initialize()
         self.model = melody_rnn
     
@@ -114,13 +114,13 @@ class Magentaimprov:
 
 if __name__ == '__main__':
 
-    test = Magentamodel()
+    test = Magentaimprov()
     #test.test_utils()
     #test.create_sequence()
     #test.load_model()
     #print(type(test.create_sequence()))
     #seq = test.create_sequence()
-    midi = test.get_generated_midi_file()
+    midi = test.generate_music()
     print(midi)
 
 
