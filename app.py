@@ -10,51 +10,73 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 
-image = Image.open('image/logo.png')
-st.image(image, use_column_width=True)
+webpage = st.sidebar.radio("Navigation",
+                           ["Music generator", "How it works", "Team"])
 
-st.header("**Lets create music**")
+if webpage == 'Music generator':
 
-st.markdown("""
-#
-#
-#### Upload your image to create your **individual** song
-###
-""")
+    image = Image.open('image/logo.png')
+    st.image(image, use_column_width=True)
 
-# And within an expander
+    st.header("**Lets create music**")
 
-form = st.form(key='my-form')
-picture = form.file_uploader("", type="jpg")
-#name = form.text_input('Enter your name')
-submit = form.form_submit_button('Create music with emotions!')
+    st.markdown("""
+    #
+    #
+    #### Upload your image to create your **individual** song
+    ###
+    """)
 
-if picture:
+    # And within an expander
 
-    image = Image.open(picture)
-    img = np.array(image)
-    st.image(image, caption='', width=300, use_column_width=False)
+    form = st.form(key='my-form')
+    picture = form.file_uploader("", type="jpg")
+    #name = form.text_input('Enter your name')
+    submit = form.form_submit_button('Create music with emotions!')
 
-if submit and picture:
+    if picture:
 
-    app = Runprograma(img)
-    ui_reply = app.run()
-    if ui_reply == 'No face detected':
-        st.warning("No face detected. Please upload a different picture")
-        #st.write("No face detected. Please upload a different picture")
-    else:
-        midi, emotion = ui_reply
-        #st.write('')
-        #st.header(f"Detected emotion: **{emotion}**")
-        st.success(f"Detected emotion: **{emotion}**")
-        st.write('')
-        midi_file_path = f"midi/{midi}"
-        wave_file_path = midi_file_path.replace(".mid", ".wav")
+        image = Image.open(picture)
+        img = np.array(image)
+        st.image(image, caption='', width=300, use_column_width=False)
 
-        fs = FluidSynth()
-        fs.midi_to_audio(midi_file_path, wave_file_path)
+    if submit and picture:
 
-        st.audio(wave_file_path, format='audio/wav', start_time=0)
-        st.markdown(
-            "   You like the song? Download it by right-clicking on the player"
-        )
+        app = Runprograma(img)
+        ui_reply = app.run()
+        if ui_reply == 'No face detected':
+            st.warning("No face detected. Please upload a different picture")
+            #st.write("No face detected. Please upload a different picture")
+        else:
+            midi, emotion = ui_reply
+            #st.write('')
+            #st.header(f"Detected emotion: **{emotion}**")
+            st.success(f"Detected emotion: **{emotion}**")
+            st.write('')
+            midi_file_path = f"midi/{midi}"
+            wave_file_path = midi_file_path.replace(".mid", ".wav")
+
+            fs = FluidSynth()
+            fs.midi_to_audio(midi_file_path, wave_file_path)
+
+            st.audio(wave_file_path, format='audio/wav', start_time=0)
+            st.markdown(
+                "   You like the song? Download it by right-clicking on the player"
+            )
+
+elif webpage == 'How it works':
+    image = Image.open('image/how_it_works.PNG')
+    st.image(image, use_column_width=True)
+
+elif webpage == 'Team':
+    image = Image.open('image/juan.jpg')
+    st.image(image, use_column_width=True)
+
+    image = Image.open('image/georgios.jpg')
+    st.image(image, use_column_width=True)
+
+    image = Image.open('image/totino.jpg')
+    st.image(image, use_column_width=True)
+
+    image = Image.open('image/danja.jpg')
+    st.image(image, use_column_width=True)
