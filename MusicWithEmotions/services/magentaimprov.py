@@ -57,13 +57,16 @@ class Magentaimprov:
 
     def load_model(self):
         root_dir = self.get_root_dir()
-        model_location = os.path.join(root_dir,"MusicWithEmotions","services","magmodels","attention_rnn.mag")
+        model_location = os.path.join(root_dir,"MusicWithEmotions","services","magmodels","chord_pitches_improv.mag")
+        
+        print('Here->')
         #bundle = sequence_generator_bundle.read_bundle_file('services/magmodels/basic_rnn.mag')
-        bundle = sequence_generator_bundle.read_bundle_file(model_location)
-        generator_map = improv_rnn_sequence_generator.get_generator_map()
-        melody_rnn = generator_map['attention_rnn'](checkpoint=None, bundle=bundle)
-        melody_rnn.initialize()
-        self.model = melody_rnn
+        #bundle = sequence_generator_bundle.read_bundle_file(model_location)
+        #generator_map = improv_rnn_sequence_generator.get_generator_map()
+        #print(generator_map.__dict__)
+        #melody_rnn = generator_map['attention_rnn'](checkpoint=None, bundle=bundle)
+        #melody_rnn.initialize()
+        #self.model = melody_rnn
     
     def create_sequence_testing(self, basicnotes=None):
         twinkle_twinkle = music_pb2.NoteSequence()
@@ -120,7 +123,7 @@ if __name__ == '__main__':
     #test.load_model()
     #print(type(test.create_sequence()))
     #seq = test.create_sequence()
-    midi = test.generate_music()
+    midi = test.load_model()
     print(midi)
 
 
