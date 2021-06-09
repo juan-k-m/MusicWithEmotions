@@ -12,7 +12,7 @@ import pandas as pd
 
 
 
-image = Image.open('ui/mwe_logo.PNG')
+image = Image.open('image/mwe_logo.PNG')
 st.image(image, use_column_width=True)
 
 
@@ -46,28 +46,28 @@ if picture:
     image = Image.open(picture)
     img = np.array(image)
     st.image(image, caption='Your Image.', width=300,  use_column_width=False)
+
+    #st.write(midi.lower())
+ 
+
+
+if submit and picture:
+
+    #run_program = Runprogram(picture)
+    #st.write(run_program.run())
+    #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
     test_ = Runprograma(img)
     midi, emotion = test_.run()
     st.write('')
     st.write(f"Detected emotion: {emotion}")
     st.write('')
-    #st.write(midi.lower())
- 
-
-
-if submit:
-
-    #run_program = Runprogram(picture)
-    #st.write(run_program.run())
-    #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
-
-    midi_file_path = f"ui/midi/{midi}"
+    midi_file_path = f"midi/{midi}"
     wave_file_path = midi_file_path.replace(".mid",".wav")
 
     fs = FluidSynth()
     fs.midi_to_audio(midi_file_path, wave_file_path)
 
-    st.audio(wave_file_path, format='audio/ogg', start_time=0)
+    st.audio(wave_file_path, format='audio/wav', start_time=0)
     st.markdown("   You like the song? Download it by right-clicking on the player")
 
     #st.write("here we test the way with the opener")
