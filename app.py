@@ -57,18 +57,22 @@ if submit and picture:
     #st.write(run_program.run())
     #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
     test_ = Runprograma(img)
-    midi, emotion = test_.run()
-    st.write('')
-    st.write(f"Detected emotion: {emotion}")
-    st.write('')
-    midi_file_path = f"midi/{midi}"
-    wave_file_path = midi_file_path.replace(".mid",".wav")
+    ui_reply = test_.run()
+    if ui_reply == 'No face detected':
+        st.write("No face detected. Please upload a different picture")
+    else:
+        midi, emotion = ui_reply
+        st.write('')
+        st.write(f"Detected emotion: {emotion}")
+        st.write('')
+        midi_file_path = f"midi/{midi}"
+        wave_file_path = midi_file_path.replace(".mid",".wav")
 
-    fs = FluidSynth()
-    fs.midi_to_audio(midi_file_path, wave_file_path)
+        fs = FluidSynth()
+        fs.midi_to_audio(midi_file_path, wave_file_path)
 
-    st.audio(wave_file_path, format='audio/wav', start_time=0)
-    st.markdown("   You like the song? Download it by right-clicking on the player")
+        st.audio(wave_file_path, format='audio/wav', start_time=0)
+        st.markdown("   You like the song? Download it by right-clicking on the player")
 
     #st.write("here we test the way with the opener")
     #audio_file_wav = open(wave_file_path, 'rb')

@@ -22,9 +22,12 @@ class Runprograma:
     def run(self):
         #self.process_picture()
         self.predict_emotion() 
-        self.get_initial_notes() 
-        return self.make_music(), self.emotion
-        
+        if self.emotion == 'No face detected':
+            ui_reply = self.emotion
+        else:
+            self.get_initial_notes() 
+            ui_reply = self.make_music(), self.emotion
+        return ui_reply
 
 
    #cleaning the picture

@@ -15,9 +15,12 @@ class Facerecognition:
 
     def image_to_emotion(self, image):
         img = self.user_pic_preproc(image)
-        path = os.path.join(self.get_root_dir(),"raw_data","model_65")
-        model = self.load_trained_model(path)
-        emotion = self.predict_emotion(model, img)
+        if img is not None:
+            path = os.path.join(self.get_root_dir(),"raw_data","model_65")
+            model = self.load_trained_model(path)
+            emotion = self.predict_emotion(model, img)
+        else:
+            emotion = 'No face detected'
         return emotion
 
 
@@ -27,22 +30,27 @@ class Facerecognition:
         face_model = cv2.CascadeClassifier(path)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_model.detectMultiScale(gray, 1.2, 15)
-    
-        # set additional border to face detection for picture extraction 
-        x, y, w, h = faces[0]
-        x2 = int(round((x - bor * w), 0))  # x 
-        y2 = int(round((y - bor * h), 0))  # y
-        w2 = int(round((w * (1 + 2 * bor)), 0))  # width of extraction
-        h2 = int(round((h * (1 + 2 * bor)), 0))  # height of extraction
-    
-        img_face = gray[y2 : y2 + h2, x2 : x2 + w2]
-        img_resized = cv2.resize(img_face, (48, 48), interpolation = cv2.INTER_AREA)
-        img_expanded = np.expand_dims(img_resized, axis = [0, -1])
+
+        if len(faces) > 0:
+            # set additional border to face detection for picture extraction 
+            x, y, w, h = faces[0]
+            x2 = int(round((x - bor * w), 0))  # x 
+            y2 = int(round((y - bor * h), 0))  # y
+            w2 = int(round((w * (1 + 2 * bor)), 0))  # width of extraction
+            h2 = int(round((h * (1 + 2 * bor)), 0))  # height of extraction
+        
+            img_face = gray[y2 : y2 + h2, x2 : x2 + w2]
+            img_resized = cv2.resize(img_face, (48, 48), interpolation = cv2.INTER_AREA)
+            img_expanded = np.expand_dims(img_resized, axis = [0, -1])
+        else:
+            img_expanded = None
     
         return img_expanded
 
+
     def load_trained_model(self, path):
          return keras.models.load_model(path)
+
 
     def predict_emotion(self,model, img):
         emotions_2 = {0:'angry', 1:'scared', 2:'happy', 3:'sad', 4:'surprised', 5:'neutral'}
@@ -51,7 +59,7 @@ class Facerecognition:
             ind = np.argmax(results[0])
             predicted_emotion = emotions_2.get(ind)
         else: 
-            predicted_emotion = 'happy'  # hard coded in case no face recognition for the sake of testing
+            predicted_emotion = None
         return predicted_emotion
 
     def test_model_load(self):
@@ -61,8 +69,6 @@ class Facerecognition:
 if __name__ == '__main__':
     #cwd = os.getcwd()
     #os.path.join(cwd)
-
-
     img = cv2.imread('../raw_data/simopic.jpg')  #  example of picture load
     test = Facerecognition()
     img_preproc = test.user_pic_preproc(img) 
