@@ -35,11 +35,8 @@ if picture:
 
 if submit and picture:
 
-    #run_program = Runprogram(picture)
-    #st.write(run_program.run())
-    #st.image(run_program.picture, caption='Your Image.', width=100,  use_column_width=False)
-    test_ = Runprograma(img)
-    ui_reply = test_.run()
+    app = Runprograma(img)
+    ui_reply = app.run()
     if ui_reply == 'No face detected':
         st.write("No face detected. Please upload a different picture")
     else:
