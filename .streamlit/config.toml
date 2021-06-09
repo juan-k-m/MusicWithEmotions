@@ -1,0 +1,18 @@
+[theme]
+
+primaryColor = "#e6eef2" #rgb(230,238,242) light light blue 
+#primaryColor = "rgb(198,224,240)" light_blue
+#primaryColor = "rgb(50, 191, 170)" green
+
+
+# main background color of the page
+backgroundColor = "#0368b0" #rgb(3, 104, 176) dark blue
+
+#background for widgets and stuff, also textinput
+secondaryBackgroundColor = "#8791dd" #rgb(135,145,221) dark weak blue 
+
+#color for text but not st commands
+textColor = "#03417a" #rgb(3, 65, 122) dark dark_blue 
+
+# text not for commands
+font = "sans serif" 
