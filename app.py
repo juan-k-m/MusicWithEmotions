@@ -58,7 +58,16 @@ if webpage == 'Music generator':
 
         image = Image.open(picture)
         img = np.array(image)
-        st.image(image, caption='', width=300, use_column_width=False)
+
+        col1, col2, col3 = st.beta_columns([1, 1, 1])
+        with col1:
+            st.write("")
+
+        with col2:
+            st.image(image, width=170, use_column_width=False)
+
+        with col3:
+            st.write("")
 
     if submit and picture:
 
