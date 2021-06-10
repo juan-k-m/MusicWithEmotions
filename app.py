@@ -10,25 +10,28 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 
-# def img_to_bytes(img_path):
-#     img_bytes = Path(img_path).read_bytes()
-#     encoded = base64.b64encode(img_bytes).decode()
-#     return encoded
+CSS = """
 
-# header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(
-#     img_to_bytes("header.png")
-# )
-# st.markdown(
-#     header_html, unsafe_allow_html=True,
-# )
+    button.css-keg18t.edgvbvh5
+    {
+    text-decoration: none;
+    background-color: #245ade;
+    color: white;
+    font-weight: bold;
+    padding: 15px 40px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    }
 
-# with open("style.css") as f:
-#     st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+    button.css-keg18t.edgvbvh5:hover 
+    {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+    }
 
-# path = "..."
-# image = Image.open(path)
+    """
 
-# st.image(image, width = 150)
+st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
 webpage = st.sidebar.radio("Navigation",
                            ["Music generator", "How it works", "Team"])
@@ -47,7 +50,7 @@ if webpage == 'Music generator':
     ###
     """)
 
-    # And within an expander
+    # UPLOADER
 
     form = st.form(key='my-form')
     picture = form.file_uploader("", type="jpg")
@@ -55,6 +58,8 @@ if webpage == 'Music generator':
     submit = form.form_submit_button('Create music with emotions!')
 
     if picture:
+
+        # PICTURE DISPLAY
 
         image = Image.open(picture)
         img = np.array(image)
