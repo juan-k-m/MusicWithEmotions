@@ -104,8 +104,16 @@ elif webpage == 'Team':
     intelligence, its areas of study and application. I intend to learn more about some of 
     these areas such as Machine Learning and Deep Learning. I am interested in working on 
     a project to apply this knowledge, so I will find a job after this course."""
-    st.image(image_1, width=170, use_column_width=False)
-    st.write(text_1)
+
+    col1, col2, col3 = st.beta_columns([4, 10, 1])
+    with col1:
+        st.image(image_1, width=170, use_column_width=False)
+
+    with col2:
+        st.write(text_1)
+
+    with col3:
+        st.write("")
     st.write("")
 
     st.markdown("### Georgios-Alexandros Christodoulou")
@@ -114,8 +122,16 @@ elif webpage == 'Team':
     Statistics so that went well... I don't have a background in Data Science or 
     Web Dev, i studied Agriculture in University, though i never finished my studies. 
     I did a lot of statistics there, so here goes that...If i remember something else i will update :)"""
-    st.image(image_2, width=170, use_column_width=False)
-    st.write(text_2)
+
+    col1, col2, col3 = st.beta_columns([4, 10, 1])
+    with col1:
+        st.image(image_2, width=170, use_column_width=False)
+
+    with col2:
+        st.write(text_2)
+
+    with col3:
+        st.write("")
     st.write("")
 
     st.markdown("### Simone Totino")
@@ -124,25 +140,29 @@ elif webpage == 'Team':
     Decided to cure my digital illiteracy and very curious to discover where this BootCamp 
     will lead me… Committed to apply my current and future skills to have a more sustainable 
     impact. Passionate about travelling, enthusiastic about outdoor activities, in love with the sea."""
-    st.image(image_3, width=170, use_column_width=False)
-    st.write(text_3)
+
+    col1, col2, col3 = st.beta_columns([4, 10, 1])
+    with col1:
+        st.image(image_3, width=170, use_column_width=False)
+
+    with col2:
+        st.write(text_3)
+
+    with col3:
+        st.write("")
     st.write("")
 
     st.markdown("### Daniil Volf")
     image_4 = Image.open('image/danja.jpg')
     text_4 = """Hi Im Daniel, my background is innovation management and engineering. Usually my role in 
     IT projects was project or product manager and now i want to dive deeper into programming and Data Science!"""
-    st.image(image_4, width=170, use_column_width=False)
-    st.write(text_4)
-    st.write("")
 
-# col1, col2, col3 = st.beta_columns([1,6,1])
+    col1, col2, col3 = st.beta_columns([4, 10, 1])
+    with col1:
+        st.image(image_4, width=170, use_column_width=False)
 
-# with col1:
-# st.write("")
+    with col2:
+        st.write(text_4)
 
-# with col2:
-# st.image("https://i.imgflip.com/amucx.jpg")
-
-# with col3:
-# st.write("")
+    with col3:
+        st.write("")
