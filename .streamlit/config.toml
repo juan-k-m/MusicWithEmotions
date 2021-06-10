@@ -1,15 +1,21 @@
 [theme]
 
-primaryColor = "#e6eef2" #rgb(230,238,242) light light blue 
-#primaryColor = "rgb(198,224,240)" light_blue
-#primaryColor = "rgb(50, 191, 170)" green
+#primaryColor = "#03417a" dark blue
+#primaryColor = "#e6eef2" rgb(230,238,242) light light blue 
+#primaryColor = "#c6e0f0"  light_blue
+primaryColor = "#17252a" # green
+
 
 
 # main background color of the page
-backgroundColor = "#0368b0" #rgb(3, 104, 176) dark blue
+#backgroundColor = "#c6e0f0"  light light blue
+backgroundColor = "#3aafa9" # greenish dark
 
-#background for widgets and stuff, also textinput
-secondaryBackgroundColor = "#8791dd" #rgb(135,145,221) dark weak blue 
+
+
+#background for inside widgets and stuff, also textinput
+#secondaryBackgroundColor = "#8791dd" #rgb(135,145,221) dark weak blue 
+secondaryBackgroundColor = "#c6e0f0" # light blue 
 
 #color for text but not st commands
 textColor = "#03417a" #rgb(3, 65, 122) dark dark_blue 
