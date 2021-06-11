@@ -10,3 +10,5 @@ raw_data/
 musmodel/
 *.mid
 *.wav
+*.svg
+*.png
