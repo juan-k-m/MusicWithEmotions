@@ -3,25 +3,38 @@
 #primaryColor = "#03417a" dark blue
 #primaryColor = "#e6eef2" rgb(230,238,242) light light blue 
 #primaryColor = "#c6e0f0"  light_blue
+<<<<<<< HEAD
 #primaryColor = "#17252a" # green
 primaryColor = "#000000" # black
+=======
+#primaryColor = "#6f8dd6" # bluelu
+>>>>>>> css_style
 
 
 
 # main background color of the page
+<<<<<<< HEAD
 #backgroundColor = "#c6e0f0"  light light blue
 #backgroundColor = "#3aafa9" # greenish dark
 backgroundColor = "#000000" # greenish dark
+=======
+#backgroundColor = "#0568b5" # light light blue
+#backgroundColor = "#0e1017" # bllaack
+>>>>>>> css_style
 
 
 
 #background for inside widgets and stuff, also textinput
 #secondaryBackgroundColor = "#8791dd" #rgb(135,145,221) dark weak blue 
+<<<<<<< HEAD
 #secondaryBackgroundColor = "#c6e0f0" # light blue 
 secondaryBackgroundColor = "#ffffff" # light blue 
+=======
+#secondaryBackgroundColor = "#32323e" # blac grey
+>>>>>>> css_style
 
 #color for text but not st commands
-textColor = "#03417a" #rgb(3, 65, 122) dark dark_blue 
+#textColor = "#fcfbf5" #rgb(3, 65, 122) beige
 
 # text not for commands
-font = "sans serif" 
+#font = "sans serif" 
